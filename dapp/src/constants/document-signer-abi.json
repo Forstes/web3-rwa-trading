@@ -1,0 +1,58 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "_documentHash",
+        "type": "string"
+      },
+      {
+        "internalType": "address[]",
+        "name": "_signers",
+        "type": "address[]"
+      }
+    ],
+    "name": "addDocument",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "documentId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_documentId",
+        "type": "uint256"
+      }
+    ],
+    "name": "signDocument",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_documentId",
+        "type": "uint256"
+      }
+    ],
+    "name": "verifyDocument",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
