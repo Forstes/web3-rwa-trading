@@ -3,30 +3,20 @@ const { ethers, run, network } = require("hardhat");
 async function main() {
   console.log(network.config);
 
-  const contractFactory = await ethers.getContractFactory("RWACollection");
-  const contract = await contractFactory.deploy("RWACollection", "RWC");
-  await contract.deployed();
-  console.log(`Contract address ${contract.address}`);
+  const rwaFactory = await ethers.getContractFactory("RWACollection");
+  const rwa_contract = await rwaFactory.deploy("RWACollection", "RWC");
+  await rwa_contract.deployed();
+  console.log(`RWACollection contract address ${rwa_contract.address}`);
 
-  if (network.config.chainId === 97) {
-    contract.deployTransaction.wait(5);
-    verify(contract.address, []);
-  }
-}
+  const docFactory = await ethers.getContractFactory("SignDocument");
+  const doc_contract = await docFactory.deploy();
+  await doc_contract.deployed();
+  console.log(`SignDocument contract address ${doc_contract.address}`);
 
-async function verify(contractAddress, arguments) {
-  try {
-    await run("verify:verify", {
-      address: contractAddress,
-      constructorArguments: arguments,
-    });
-  } catch (e) {
-    if (e.message.toLowerCase.includes("already verified")) {
-      console.log("The contract already verified");
-    } else {
-      console.log(e);
-    }
-  }
+  const exchangeFactory = await ethers.getContractFactory("RWAExchange");
+  const exchange_contract = await exchangeFactory.deploy(rwa_contract.address, doc_contract.address);
+  await exchange_contract.deployed();
+  console.log(`Exchange contract address ${exchange_contract.address}`);
 }
 
 main()

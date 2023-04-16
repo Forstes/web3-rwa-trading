@@ -7,7 +7,7 @@ contract SignDocument {
     using SafeMath for uint256;
 
     struct Document {
-        bytes32 hash;
+        string hash;
         address[] signers;
         mapping(address => bool) hasSigned;
         uint256 timestamp;
@@ -36,7 +36,7 @@ contract SignDocument {
         }
     }
 
-    function addDocument(bytes32 _documentHash, address[] memory _signers) external returns (uint256 documentId) {
+    function addDocument(string calldata _documentHash, address[] memory _signers) external returns (uint256 documentId) {
         documentCounter++;
         require(documents[documentCounter].signers.length == 0, "Document already exists");
         require(_signers.length > 0, "Document must have at least one signer");
